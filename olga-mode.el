@@ -19,12 +19,79 @@
 
 ;;; Commentary:
 
-;; This package provides the `adaptive-wrap-prefix-mode' minor mode which sets
-;; the wrap-prefix property on the fly so that single-long-line paragraphs get
-;; word-wrapped in a way similar to what you'd get with M-q using
-;; adaptive-fill-mode, but without actually changing the buffer's text.
+;;
+;;
 
 ;;; Code:
+;; user definable variables
+;;----------------------------------------------------------------------------
+
+(defgroup olga nil
+  "Support for the Python programming language, <http://www.python.org/>"
+  :group 'languages
+  :prefix "ol-")
+
+(defcustom ol-olga-command "python"
+  "*Shell command used to start Python interpreter."
+  :type 'string
+  :group 'olga)
+
+(defcustom ol-olga-command-args '("-i")
+  "*List of string arguments to be used when starting a Python shell."
+  :type '(repeat string)
+  :group 'olga)
+
+;; No more user defined variables
+;; ---------------------------------------------------------------------------
+
+;;; Keywords
+(setq ol-olga-font-lock-keywords
+      (let* (
+             ;; define several category of keywords
+             (x-keywords '("break" "default" "do" "else" "for" "if" "return" "state" "while"))
+             (x-types '("float" "integer" "key" "list" "rotation" "string" "vector"))
+             (x-constants '("ACTIVE" "AGENT" "ALL_SIDES" "ATTACH_BACK"))
+             (x-events '("at_rot_target" "at_target" "attach"))
+             (x-functions '("llAbs" "llAcos" "llAddToLandBanList" "llAddToLandPassList"))
+
+             ;; Regex definition
+             ;; ----------------
+             (x-keywords-regexp (regexp-opt x-keywords 'words))
+             (x-types-regexp (regexp-opt x-types 'words))
+             (x-constants-regexp (regexp-opt x-constants 'words))
+             (x-events-regexp (regexp-opt x-events 'words))
+             (x-functions-regexp (regexp-opt x-functions 'words)))
+
+        `(
+          (,x-types-regexp . font-lock-type-face)
+          (,x-constants-regexp . font-lock-constant-face)
+          (,x-events-regexp . font-lock-builtin-face)
+          (,x-functions-regexp . font-lock-function-name-face)
+          (,x-keywords-regexp . font-lock-keyword-face)
+          ;; note: order above matters, because once colored, that part won't change.
+          ;; in general, put longer words first
+          )))
+
+;;; Syntax table
+(defvar ol-olga-mode-syntax-table nil "Syntax table for `olga-mode'.")
+(setq ol-olga-mode-syntax-table
+      (let ( (synTable (make-syntax-table)))
+        ;; python style comment: “; …”
+        (modify-syntax-entry ?\; "<" synTable)
+        (modify-syntax-entry ?\n ">" synTable)
+        synTable))
+
+;;; Command dwim
+(setq-local comment-start "; ")
+(setq-local comment-end "")
+
+;;; Derived mode definition
+;; -----------------------------------------------------------------------------
+(define-derived-mode olga-mode prog-mode "OLGA mode"
+  "major mode for editing OLGA language code."
+  (setq font-lock-defaults '(ol-olga-font-lock-keywords))
+  (set-syntax-table ol-olga-mode-syntax-table)
+  )
 
 (provide 'olga-mode)
 ;;; olga-mode.el ends here
