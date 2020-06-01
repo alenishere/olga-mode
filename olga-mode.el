@@ -43,12 +43,37 @@
 
 ;; No more user defined variables
 ;; ---------------------------------------------------------------------------
+;; ;; define several category of keywords
+;;              (x-keywords '("CASE" "OPTIONS" "FILES" "DTCONTROL" "INTEGRATION" "TREND" "PROFILE" "RESTART" "WATEROPTIONS" "PROFILEDATA" "TRENDDATA" "OUTPUTDATA" "MATERIAL" "WALL" "CONNECTION" "SHUTIN" "HYDRATECURVE" "SOURCE" "WELL" "VALVE" "TRANSMITTER" "POSITION" "GEOMETRY" "PIPE" "HEATTRANSFER" "PARAMETERS" "BRANCH" "TUNING"))
+;;              ;; (x-types '("float" "integer" "key" "list" "rotation" "string" "vector"))
+;;              (x-constants '("ACTIVE" "AGENT" "ALL_SIDES" "ATTACH_BACK"))
+;;              (x-events '("at_rot_target" "at_target" "attach"))
+;;              (x-functions '("NETWORKCOMPONENT" "ENDNETWORKCOMPONENT"))
 
+;;              ;; generate regex string for each category of keywords
+;;              (x-functions-regexp (regexp-opt x-functions 'words))
+;;              (x-keywords-regexp (regexp-opt x-keywords 'words))
+;;              ;; (x-types-regexp (regexp-opt x-types 'words))
+;;              (x-constants-regexp (regexp-opt x-constants 'words))
+;;              (x-events-regexp (regexp-opt x-events 'words))
+
+
+;;         `
+;;           (,x-functions-regexp . font-lock-function-name-face)
+;;           ;; (,x-types-regexp . font-lock-type-face)
+;;           (,x-constants-regexp . font-lock-constant-face)
+;;           (,x-events-regexp . font-lock-builtin-face)
+;;           (,x-keywords-regexp . font-lock-keyword-face)
+;;           ;; note: order above matters, because once colored, that part won't change.
+;;           ;; in general, put longer words first
 ;;; Keywords
 (setq ol-olga-font-lock-keywords
       (let* (
              ;; define several category of keywords
-             (x-keywords '("break" "default" "do" "else" "for" "if" "return" "state" "while"))
+             (x-keywords '("CASE" "OPTIONS" "FILES" "DTCONTROL" "INTEGRATION" "TREND" "PROFILE" "RESTART"
+                           "WATEROPTIONS" "PROFILEDATA" "TRENDDATA" "OUTPUTDATA" "MATERIAL" "WALL" "CONNECTION"
+                           "SHUTIN" "HYDRATECURVE" "SOURCE" "WELL" "VALVE" "TRANSMITTER" "POSITION" "GEOMETRY"
+                           "PIPE" "HEATTRANSFER" "PARAMETERS" "BRANCH" "TUNING"))
              (x-types '("float" "integer" "key" "list" "rotation" "string" "vector"))
              (x-constants '("ACTIVE" "AGENT" "ALL_SIDES" "ATTACH_BACK"))
              (x-events '("at_rot_target" "at_target" "attach"))
@@ -72,18 +97,29 @@
           ;; in general, put longer words first
           )))
 
+;;; Syntax completion
+;; ----------------------------------------------------------------------------
+
+;;;  Syntax checker
+;; ----------------------------------------------------------------------------
+
+;;; Org mode functions
+;; ----------------------------------------------------------------------------
+
+;;; Code folding
+;; ----------------------------------------------------------------------------
+
 ;;; Syntax table
+;; ----------------------------------------------------------------------------
 (defvar ol-olga-mode-syntax-table nil "Syntax table for `olga-mode'.")
 (setq ol-olga-mode-syntax-table
       (let ( (synTable (make-syntax-table)))
-        ;; python style comment: “; …”
-        (modify-syntax-entry ?\; "<" synTable)
+        ;; python style comment: “! …”
+        (modify-syntax-entry ?\! "<" synTable)
         (modify-syntax-entry ?\n ">" synTable)
         synTable))
 
-;;; Command dwim
-(setq-local comment-start "; ")
-(setq-local comment-end "")
+
 
 ;;; Derived mode definition
 ;; -----------------------------------------------------------------------------
@@ -91,6 +127,9 @@
   "major mode for editing OLGA language code."
   (setq font-lock-defaults '(ol-olga-font-lock-keywords))
   (set-syntax-table ol-olga-mode-syntax-table)
+  ;; Comment dwim
+  (setq-local comment-start "\! ")
+  (setq-local comment-end "")
   )
 
 (provide 'olga-mode)
