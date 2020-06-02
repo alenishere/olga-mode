@@ -23,22 +23,47 @@
 ;;
 
 ;;; Code:
+;; Import
+;; ---------------------------------------------------------------------------
+(eval-when-compile
+  (require 'cl-lib))
+
+(require 'comint)
+(require 'newcomment)
+(require 'rx)
+(eval-when-compile
+  ;; Silence compilation warning about `compilation-error-regexp-alist' defined
+  ;; in compile.el.
+  (require 'compile))
+
+
+
 ;; user definable variables
 ;;----------------------------------------------------------------------------
 
 (defgroup olga nil
-  "Support for the Python programming language, <http://www.python.org/>"
+  "Support for the OLGA text inputs"
   :group 'languages
   :prefix "ol-")
 
-(defcustom ol-olga-command "python"
+(defcustom ol-command "python"
   "*Shell command used to start Python interpreter."
   :type 'string
   :group 'olga)
 
-(defcustom ol-olga-command-args '("-i")
+(defcustom ol-command-args '("-i")
   "*List of string arguments to be used when starting a Python shell."
   :type '(repeat string)
+  :group 'olga)
+
+(defcustom ol-version "7.3.5"
+  "*List of string arguments to be used when starting a Python shell."
+  :type 'string
+  :group 'olga)
+
+(defcustom ol-executable "7.3.5"
+  "*List of string arguments to be used when starting a Python shell."
+  :type 'string
   :group 'olga)
 
 ;; No more user defined variables
@@ -67,7 +92,7 @@
 ;;           ;; note: order above matters, because once colored, that part won't change.
 ;;           ;; in general, put longer words first
 ;;; Keywords
-(setq ol-olga-font-lock-keywords
+(setq ol-font-lock-keywords
       (let* (
              ;; define several category of keywords
              (x-keywords '("CASE" "OPTIONS" "FILES" "DTCONTROL" "INTEGRATION" "TREND" "PROFILE" "RESTART"
@@ -111,8 +136,8 @@
 
 ;;; Syntax table
 ;; ----------------------------------------------------------------------------
-(defvar ol-olga-mode-syntax-table nil "Syntax table for `olga-mode'.")
-(setq ol-olga-mode-syntax-table
+(defvar ol-mode-syntax-table nil "Syntax table for `olga-mode'.")
+(setq ol-mode-syntax-table
       (let ( (synTable (make-syntax-table)))
         ;; python style comment: “! …”
         (modify-syntax-entry ?\! "<" synTable)
@@ -125,8 +150,8 @@
 ;; -----------------------------------------------------------------------------
 (define-derived-mode olga-mode prog-mode "OLGA mode"
   "major mode for editing OLGA language code."
-  (setq font-lock-defaults '(ol-olga-font-lock-keywords))
-  (set-syntax-table ol-olga-mode-syntax-table)
+  (setq font-lock-defaults '(ol-font-lock-keywords))
+  (set-syntax-table ol-mode-syntax-table)
   ;; Comment dwim
   (setq-local comment-start "\! ")
   (setq-local comment-end "")
