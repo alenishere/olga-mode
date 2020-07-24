@@ -154,5 +154,17 @@
   (setq-local comment-end "")
   )
 
+;;; Associations
+;;; -----------------------------------------------------------------------------
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.inp\\'" . olga-mode))
+
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.genkey\\'" . olga-mode))
+
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.key\\'" . olga-mode))
+
+
 (provide 'olga-mode)
 ;;; olga-mode.el ends here
