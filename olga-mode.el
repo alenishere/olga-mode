@@ -131,6 +131,24 @@
 ;;; Code folding
 ;; ----------------------------------------------------------------------------
 
+;;; Custom functions
+;;; ---------------------------------------------------------------------------
+;; Material label insert
+;; Wall label insert
+;; Source edits
+;; Connection edits
+;; Visualization of model
+;; Well edits
+;; Options edit
+;; Restart edit
+;; Valve edit
+;;
+;; Flowline edits
+;; ------------------------------------------------------------------------------
+;; 1. Wall property edits
+;; 2. Segment edits
+;; 3. Effective segmentation check
+
 ;;; Syntax table
 ;; ----------------------------------------------------------------------------
 (defvar ol-mode-syntax-table nil "Syntax table for `olga-mode'.")

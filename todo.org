@@ -1,0 +1,48 @@
+* Inbox
+** TODO Define dependencies
+* DONE File association
+CLOSED: [2020-07-24 Fri 11:36]
+* TODO Custom Functions
+*** TODO OLGA version checks
+*** TODO OLGA run file
+*** TODO Material label insert
+
+[[file:~/.doom.d/extras/olga/olga-mode.el::;; Material label insert]]
+*** TODO Wall label insert
+*** TODO Source edits
+*** TODO Reservoir edit
+*** TODO Connection edits
+*** TODO Visualization of model
+*** TODO Well edits
+*** TODO Options edit
+*** TODO Restart edit
+*** TODO Valve edit
+*** TODO Flowline edits
+**** TODO Wall property edits
+**** TODO Segment edits
+**** TODO Effective segmentation check
+*** TODO Transmitter edit
+*** TODO Controller edit
+*** TODO Hydrate curve edit
+*** TODO Pump definition and edit
+*** TODO Position edit
+*** TODO Plotting frequency edits
+*** TODO Component fluid file selection
+*** TODO Validation checks
+* TODO Custom variable
+* TODO Task runner
+** TODO OLGA version
+** TODO OLGA executable path
+** TODO Model validation checks
+* TODO Template generation
+* TODO Org mode babel function
+* TODO Data extraction and processing
+** TODO PYFAS integration
+** TODO TPL processing
+** TODO PPL processing
+** TODO PI intergration
+* TODO Tab file
+** TODO Tab file edits
+** TODO Merge Gas Tab file
+** TODO Tab file checks
+* TODO Custom Hydras
