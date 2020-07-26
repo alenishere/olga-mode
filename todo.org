@@ -1,3 +1,17 @@
+#+TITLE: OLGA mode
+#+AUTHOR: Alen Alex Ninan
+#+EMAIL: alenishere@gmail.com
+Time-stamp: <2020-07-24 18:38:10 alen.alexninan>
+#+PROPERTY: ANKI_DECK Default
+#+STARTUP: content
+#+STARTUP: indent
+#+STARTUP: align
+#+STARTUP: inlineimages
+#+ARCHIVE: %s_done::
+#+OPTIONS: num:0 toc:nil
+#+STARTUP: hidebloacks
+#+STARTUP: hidestars
+#+STARTUP: latexpreview
 * Inbox
 ** TODO Define dependencies
 * DONE File association
@@ -6,7 +20,6 @@ CLOSED: [2020-07-24 Fri 11:36]
 *** TODO OLGA version checks
 *** TODO OLGA run file
 *** TODO Material label insert
-
 [[file:~/.doom.d/extras/olga/olga-mode.el::;; Material label insert]]
 *** TODO Wall label insert
 *** TODO Source edits
@@ -20,6 +33,7 @@ CLOSED: [2020-07-24 Fri 11:36]
 *** TODO Flowline edits
 **** TODO Wall property edits
 **** TODO Segment edits
+**** TODO Angle class
 **** TODO Effective segmentation check
 *** TODO Transmitter edit
 *** TODO Controller edit
@@ -29,6 +43,9 @@ CLOSED: [2020-07-24 Fri 11:36]
 *** TODO Plotting frequency edits
 *** TODO Component fluid file selection
 *** TODO Validation checks
+*** TODO FEA analysis for cooldown
+*** TODO Sand modeling inputs
+*** TODO Drilling fluid edits
 * TODO Custom variable
 * TODO Task runner
 ** TODO OLGA version
@@ -36,13 +53,19 @@ CLOSED: [2020-07-24 Fri 11:36]
 ** TODO Model validation checks
 * TODO Template generation
 * TODO Org mode babel function
+** TODO Org babel tangle
+** TODO Org babel completion
 * TODO Data extraction and processing
 ** TODO PYFAS integration
 ** TODO TPL processing
+*** TODO Average Value calculation
 ** TODO PPL processing
-** TODO PI intergration
+** TODO PI integration
+** TODO Results check
+*** TODO Steady state check
 * TODO Tab file
 ** TODO Tab file edits
-** TODO Merge Gas Tab file
+** TODO Gas Property correction
+** TODO Water property correction
 ** TODO Tab file checks
 * TODO Custom Hydras
